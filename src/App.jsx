@@ -1,11 +1,13 @@
 import axios from "axios"
 import { useState } from "react"
 import { useEffect } from "react"
-
-
+import moment from "moment-timezone"
 function App() {
   const [update, setUpdate] = useState(false)
   const [data, setData] = useState([])
+  const now = moment();
+  const chicagoTime = now.tz('America/Chicago').format('HH:mm');
+  const newYorkTime = now.tz('America/New_York').format('HH:mm');
   useEffect(() => {
 
     const getData = async () => {
@@ -21,10 +23,57 @@ function App() {
     }
     getData()
   }, [update])
+  const item = data.map((item) => {
+
+    return {
+      "id": "INCREMENT",
+      "name": item.message?.pkey?.name,
+      "days": item.message?.pkey?.days,
+      "ticker:tk": item.message?.pkey?.ticker?.tk,
+      "mrkPrice": item.message.mrkPrice,
+      "chicagoTime": chicagoTime,
+      "newYorkTime": newYorkTime,
+
+
+    }
+  })
+
+
+
+  const sheetData = async () => {
+    if (item.length !== 0) {
+      fetch('https://sheetdb.io/api/v1/m77fj105buwjy', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          data: item
+        })
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    }
+  };
+
+  const scheduleTask = () => {
+
+    console.log(chicagoTime, newYorkTime);
+    if (chicagoTime === '15:00' || newYorkTime === '16:00') {
+      sheetData();
+    }
+
+  };
+  scheduleTask()
+  // Check every minute
+  // setInterval(scheduleTask, 60 * 1000);
 
   setTimeout(() => {
     setUpdate(!update)
+    scheduleTask()
   }, 60000);
+
 
 
   return (
