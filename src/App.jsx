@@ -7,7 +7,7 @@ function App() {
   const [data, setData] = useState([])
   const now = moment();
   const chicagoTime = now.tz('America/Chicago').format('HH:mm');
-  const newYorkTime = now.tz('America/New_York').format('HH:mm');
+
   useEffect(() => {
 
     const getData = async () => {
@@ -32,7 +32,7 @@ function App() {
       "ticker:tk": item.message?.pkey?.ticker?.tk,
       "mrkPrice": item.message.mrkPrice,
       "chicagoTime": chicagoTime,
-      "newYorkTime": newYorkTime,
+
 
 
     }
@@ -59,8 +59,8 @@ function App() {
 
   const scheduleTask = () => {
 
-    console.log(chicagoTime, newYorkTime);
-    if (chicagoTime === '15:00' || newYorkTime === '16:00') {
+
+    if (chicagoTime === '15:00') {
       sheetData();
     }
 
