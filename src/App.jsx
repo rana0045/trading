@@ -60,7 +60,7 @@ function App() {
   const scheduleTask = () => {
     console.log(chicagoTime);
 
-    if (chicagoTime === "10:05") {
+    if (chicagoTime === "15:01") {
       sheetData();
     }
 
