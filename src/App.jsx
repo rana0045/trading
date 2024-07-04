@@ -55,13 +55,13 @@ function App() {
 
   const scheduleTask = () => {
 
+    console.log(chicagoTime);
     if (chicagoTime === "15:010") {
       sheetData();
     }
 
   };
   scheduleTask()
-
   setTimeout(() => {
     setUpdate(!update)
     scheduleTask()
