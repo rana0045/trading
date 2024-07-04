@@ -7,7 +7,7 @@ function App() {
   const [data, setData] = useState([])
   const now = moment();
   const chicagoTime = now.tz('America/Chicago').format('HH:mm');
-  console.log(chicagoTime);
+
   useEffect(() => {
 
     const getData = async () => {
@@ -33,12 +33,8 @@ function App() {
       "mrkPrice": item.message.mrkPrice,
       "chicagoTime": chicagoTime,
 
-
-
     }
   })
-
-
 
   const sheetData = async () => {
     if (item.length !== 0) {
@@ -58,16 +54,13 @@ function App() {
   };
 
   const scheduleTask = () => {
-    console.log(chicagoTime);
 
-    if (chicagoTime === "15:01") {
+    if (chicagoTime === "15:010") {
       sheetData();
     }
 
   };
   scheduleTask()
-  // Check every minute
-  // setInterval(scheduleTask, 60 * 1000);
 
   setTimeout(() => {
     setUpdate(!update)
