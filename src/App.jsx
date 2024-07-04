@@ -7,7 +7,7 @@ function App() {
   const [data, setData] = useState([])
   const now = moment();
   const chicagoTime = now.tz('America/Chicago').format('HH:mm');
-
+  console.log(chicagoTime);
   useEffect(() => {
 
     const getData = async () => {
@@ -58,9 +58,9 @@ function App() {
   };
 
   const scheduleTask = () => {
+    console.log(chicagoTime);
 
-
-    if (chicagoTime === '15:00') {
+    if (chicagoTime === "10:05") {
       sheetData();
     }
 
