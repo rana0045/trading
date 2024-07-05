@@ -5,6 +5,7 @@ import moment from "moment-timezone"
 function App() {
   const [update, setUpdate] = useState(false)
   const [data, setData] = useState([])
+  const [updateSheet, setUpdateSheet] = useState(false)
   const now = moment();
   const chicagoTime = now.tz('America/Chicago').format('HH:mm');
 
@@ -53,19 +54,35 @@ function App() {
     }
   };
 
-  const scheduleTask = () => {
-
+  useEffect(() => {
     console.log(chicagoTime);
-    if (chicagoTime === "15:16") {
-      sheetData();
-    }
+    if (chicagoTime === "15:00" && updateSheet === false) {
+      sheetData()
+      setUpdateSheet(true)
+      console.log(chicagoTime, "done");
 
-  };
-  scheduleTask()
+    }
+  }, [chicagoTime])
+
+
+  useEffect(() => {
+    setUpdateSheet(false)
+  }, [chicagoTime])
+
   setTimeout(() => {
     setUpdate(!update)
-    scheduleTask()
+    // scheduleTask()
   }, 60000);
+
+  // const scheduleTask = () => {
+
+  //   console.log(chicagoTime);
+  //   if (chicagoTime === "09:50") {
+
+  //   }
+
+  // };
+
 
 
 
@@ -168,8 +185,3 @@ function App() {
   )
 }
 export default App
-
-
-
-
-
