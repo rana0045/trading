@@ -36,10 +36,10 @@ function App() {
 
     }
   })
-
+  console.log(item);
   const sheetData = async () => {
     if (item.length !== 0) {
-      await fetch('https://sheetdb.io/api/v1/m77fj105buwjy', {
+      await fetch('https://sheetdb.io/api/v1/6w14o4z4z1q8e', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
