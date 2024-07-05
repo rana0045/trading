@@ -54,14 +54,20 @@ function App() {
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     console.log(chicagoTime);
-    if (chicagoTime === "15:15" && updateSheet === false) {
-      await sheetData()
-      setUpdateSheet(true)
-      console.log(chicagoTime, updateSheet, "done");
 
+    const sheetUpdate = async () => {
+      if (chicagoTime === import.meta.env.VITE_TIME_FOR_UPDATE && updateSheet === false) {
+        await sheetData()
+        setUpdateSheet(true)
+        console.log(chicagoTime, updateSheet, "done");
+
+      }
     }
+
+    console.log(import.meta.env.VITE_TIME_FOR_UPDATE);
+    sheetUpdate()
   }, [chicagoTime])
 
 
