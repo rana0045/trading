@@ -39,7 +39,7 @@ function App() {
 
   const sheetData = async () => {
     if (item.length !== 0) {
-      fetch('https://sheetdb.io/api/v1/m77fj105buwjy', {
+      await fetch('https://sheetdb.io/api/v1/m77fj105buwjy', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -54,10 +54,10 @@ function App() {
     }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     console.log(chicagoTime);
-    if (chicagoTime === "15:10" && updateSheet === false) {
-      sheetData()
+    if (chicagoTime === "15:15" && updateSheet === false) {
+      await sheetData()
       setUpdateSheet(true)
       console.log(chicagoTime, updateSheet, "done");
 
