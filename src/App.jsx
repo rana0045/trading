@@ -56,7 +56,7 @@ function App() {
 
   useEffect(() => {
     console.log(chicagoTime);
-    if (chicagoTime === "12:12" && updateSheet === false) {
+    if (chicagoTime === "12:17" && updateSheet === false) {
       sheetData()
       setUpdateSheet(true)
       console.log(chicagoTime, "done");
